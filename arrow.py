@@ -32,7 +32,7 @@ from random import randint
 ################################################################
 
 # Initialize world
-name = "Cat Fun. Press the mouse (but not too fast)!"
+name = "Arrow Simulation"
 width = 500
 height = 500
 rw.newDisplay(width, height, name)
@@ -50,7 +50,6 @@ def updateDisplay(state):
     dw.fill(dw.black)
     dw.draw(myimage, (state))
 
-
 ################################################################
 
 # Change pos by delta-pos, leaving delta-pos unchanged
@@ -60,8 +59,7 @@ def updateDisplay(state):
 #
 # state -> state
 def updateState(state):
-    return(state[0]+state[2], state[1] + state[3], state[2], state[3])
-
+    return(state[0] + 1, (0.0048*((state[0])**2))-(2.4*(state[0]))+500)
 ################################################################
 
 # Terminate the simulation when the x coord reaches the screen edge,
@@ -89,21 +87,14 @@ def endState(state):
 #
 def handleEvent(state, event):  
 #    print("Handling event: " + str(event))
-    if (event.type == pg.MOUSEBUTTONDOWN):
-        if (state[2]) == state[2]:
-            newX = randint(-2,2)
-        if (state[3] == state[3]):
-            newY = randint(-2,2)
-        return((state[0], state[1], newX, newY))
-    else:
-        return(state)
+     return(state)
 
 ################################################################
 
 # World state will be single x coordinate at left edge of world
 
-# The cat starts at the left, moving right 
-initState = (randint(200,299), randint(200,299), randint(-2,2), randint(-2,2))
+# The cat starts at the left, moving right
+initState = (0, 500)
 
 # Run the simulation no faster than 60 frames per second
 frameRate = 60
