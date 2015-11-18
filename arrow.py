@@ -40,7 +40,7 @@ rw.newDisplay(width, height, name)
 ################################################################
 
 # Display the state by drawing a cat at that x coordinate
-myimage = dw.loadImage("cat.bmp")
+myimage = dw.loadImage("soccer.jpeg")
 
 # state -> image (IO)
 # draw the cat halfway up the screen (height/2) and at the x
