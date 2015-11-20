@@ -33,16 +33,14 @@ from random import randint
 
 # Initialize world
 name = "Arrow Simulation"
-width = 1500
-height = 1000
+width = 1000
+height = 750
 rw.newDisplay(width, height, name)
 
 ################################################################
 
 # Display the state by drawing a cat at that x coordinate
 myimage = dw.loadImage("soccer.jpeg")
-player1 = dw.loadImage("p6.jpeg")
-player2 = dw.loadImage("p6.jpeg")
 
 #300x168
 
@@ -53,8 +51,6 @@ player2 = dw.loadImage("p6.jpeg")
 def updateDisplay(state):
     dw.fill(dw.black)
     dw.draw(myimage, (state))
-    dw.draw(player1, (0,500))
-    dw.draw(player2, (1275,500))
 
 ################################################################
 
@@ -65,7 +61,8 @@ def updateDisplay(state):
 #
 # state -> state
 def updateState(state):
-    return(state[0] + 1, (0.0048*((state[0])**2))-(2.4*(state[0]))+500)
+    return(state[0] + 1, (0.003125*((state[0])**2))-(2.5*(state[0]))+600)
+
 ################################################################
 
 # Terminate the simulation when the x coord reaches the screen edge,
@@ -91,21 +88,17 @@ def endState(state):
 #
 # state -> event -> state
 #
-def handleEvent(state, event):  
-#    print("Handling event: " + str(event))
-     return(state)
+def handleEvent(state, event):
+    return(state)
 
 ################################################################
 
 # World state will be single x coordinate at left edge of world
 
 # The cat starts at the left, moving right
-initState = (0, 500)
-initStatePlayer1 = (50,0);
+initState = (0, 600)
 # Run the simulation no faster than 60 frames per second
 frameRate = 60
 
 # Run the simulation!
-rw.runWorld(initStatePlayer1, updateDisplay, updateState, handleEvent,
-            endState, frameRate)
 rw.runWorld(initState, updateDisplay, updateState, handleEvent, endState, frameRate)
