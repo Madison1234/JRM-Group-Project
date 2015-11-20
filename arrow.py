@@ -5,15 +5,23 @@ import pygame as pg
 from random import randint
 
 name = "Arrow Simulation"
-width = 1000
+width = 2000
 height = 750
 rw.newDisplay(width, height, name)
 
 myimage = dw.loadImage("soccer.jpeg")
+goal=dw.loadImage("goall.gif")
+player=dw.loadImage("p6.jpeg")
+player2=dw.loadImage("p6.jpeg")
 
 def updateDisplay(state):
     dw.fill(dw.black)
     dw.draw(myimage, (state))
+    dw.draw(goal, (870,550))
+    dw.draw(player,(0,500))
+    dw.draw(player2, (550,10))
+    
+    
 
 def updateState(state):
     return(state[0] + 1, (0.003125*((state[0])**2))-(2.5*(state[0]))+600)
@@ -32,6 +40,6 @@ def handleEvent(state, event):
 
 initState = (0, 600)
 
-frameRate = 60
+frameRate = 90
 
 rw.runWorld(initState, updateDisplay, updateState, handleEvent, endState, frameRate)
