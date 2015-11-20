@@ -33,18 +33,15 @@ from random import randint
 
 # Initialize world
 name = "Arrow Simulation"
-width = 1500
-height = 1000
+width = 1000
+height = 9000
 rw.newDisplay(width, height, name)
 
 ################################################################
 
 # Display the state by drawing a cat at that x coordinate
 myimage = dw.loadImage("soccer.jpeg")
-player1 = dw.loadImage("p6.jpeg")
-player2 = dw.loadImage("p6.jpeg")
 
-#300x168
 
 # state -> image (IO)
 # draw the cat halfway up the screen (height/2) and at the x
@@ -53,8 +50,7 @@ player2 = dw.loadImage("p6.jpeg")
 def updateDisplay(state):
     dw.fill(dw.black)
     dw.draw(myimage, (state))
-    dw.draw(player1, (0,500))
-    dw.draw(player2, (1275,500))
+
 
 ################################################################
 
@@ -101,7 +97,6 @@ def handleEvent(state, event):
 
 # The cat starts at the left, moving right
 initState = (0, 500)
-initStatePlayer1 = (50,0);
 # Run the simulation no faster than 60 frames per second
 frameRate = 60
 
