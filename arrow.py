@@ -16,7 +16,7 @@ player2=dw.loadImage("p6.jpeg")
 
 def updateDisplay(state):
     dw.fill(dw.black)
-    dw.draw(myimage, (state))
+    dw.draw(myimage, (state[0], state[1]))
     dw.draw(goal, (870,550))
     dw.draw(player,(0,500))
     dw.draw(player2, (550,10))
@@ -24,7 +24,7 @@ def updateDisplay(state):
     
 
 def updateState(state):
-    return(state[0] + 1, (0.003125*((state[0])**2))-(2.5*(state[0]))+600)
+    return(state[0] + state[2], (0.003125*((state[0])**2))-(2.5*(state[0]))+600, state[2])
 
 def endState(state):
     if (state[0] > width or state[0] < 0 or state[1] > height or state[1] < 0):
@@ -35,10 +35,12 @@ def endState(state):
 def handleEvent(state, event):
     if (event.type == pg.MOUSEBUTTONDOWN and state < (1000,750)):
         return initState
+    elif (event.type == pg.KEYDOWN):
+        return (state[0], state[1], state[2] * -1)
     else:
         return (state)
 
-initState = (0, 600)
+initState = (0, 600, 1)
 
 frameRate = 90
 
