@@ -4,7 +4,7 @@ import pygame as pg
 
 from random import randint
 
-name = "Arrow Simulation"
+name = "Soccer Game Simulation"
 width = 1100
 height = 750
 rw.newDisplay(width, height, name)
