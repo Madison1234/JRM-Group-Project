@@ -9,6 +9,16 @@ width = 1100
 height = 750
 rw.newDisplay(width, height, name)
 
+
+class State:
+    x = 0
+    y = 600
+    v = 1
+
+
+ballState = State()
+
+
 myimage = dw.loadImage("soccer.jpeg")
 goal=dw.loadImage("goall.gif")
 player=dw.loadImage("p6.jpeg")
@@ -16,32 +26,35 @@ player2=dw.loadImage("p6.jpeg")
 
 def updateDisplay(state):
     dw.fill(dw.green)
-    dw.draw(myimage, (state[0], state[1]))
+    dw.draw(myimage, (state.x, state.y))
     dw.draw(goal, (870,550))
     dw.draw(player,(0,500))
     dw.draw(player2, (550,10))
 
 def updateState(state):
-    if(state[0] == 750 and state[2] == 1):
+    if(state.x == 750 and state.v == 1):
         print("Goal!")
-    return(state[0] + state[2], (0.003125*((state[0])**2))-(2.5*(state[0]))+600, state[2])
+    state.x = state.x + state.v
+    state.y = 0.003125*((state.x)**2)-(2.5*(state.x))+600
+    state.v = state.v  
+    return (state)
 
 def endState(state):
-    if (state[0] > width or state[0] < 0 or state[1] > height or state[1] < 0):
+    if (state.x > width or state.x < 0 or state.y > height or state.y < 0):
         return True
     else:
         return False
 
 def handleEvent(state, event):
-    if (event.type == pg.MOUSEBUTTONDOWN and state < (1000,750)):
-        return initState
+    if (event.type == pg.MOUSEBUTTONDOWN and state.x < 1000 and state.y < 750):
+        return state
     elif (event.type == pg.KEYDOWN):
-        return (state[0], state[1], state[2] * -1)
+        state.v = state.v * -1
+        return (state)
     else:
         return (state)
     
-initState = (0, 600, 1)
 
 frameRate = 90
 
-rw.runWorld(initState, updateDisplay, updateState, handleEvent, endState, frameRate)
+rw.runWorld(ballState, updateDisplay, updateState, handleEvent, endState, frameRate)
